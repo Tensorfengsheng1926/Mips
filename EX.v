@@ -25,6 +25,10 @@ module EX(
         `FUNCT_OR: result <= (operand_1 | operand_2); 
         `FUNCT_ADDU:result <= operand_1 + operand_2;
         `FUNCT_SUBU:result <= operand_1 - operand_2;//+((~operand_2)+1)
+        `FUNCT_SLLV:result <= operand_2 << operand_1[4:0];
+        `FUNCT_SRLV:result <= operand_2 >> operand_1[4:0];
+        //À„ ı”““∆£¨ø’Œª”√rs[31]≤π
+        `FUNCT_SRAV:result <= ({32{operand_2[31]}} << (6'd32-{1'b0, operand_1[4:0]})) | operand_2 >> operand_1[4:0];
         default: begin 
         result <= 0; 
         end 
